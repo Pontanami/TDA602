@@ -28,6 +28,17 @@ public class Wallet {
 	return Integer.parseInt(this.file.readLine());
     }
 
+
+    public boolean safeWithdraw(int valueToWithdraw) throws Exception {
+    int currentBalance = getBalance();
+        if (currentBalance >= valueToWithdraw) {
+            setBalance(currentBalance - valueToWithdraw);
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Sets a new balance in the wallet
      *
@@ -44,5 +55,6 @@ public class Wallet {
      */
     public void close() throws Exception {
 	this.file.close();
+
     }
 }

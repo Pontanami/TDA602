@@ -2,6 +2,7 @@ import backEnd.*;
 import java.util.Scanner;
 
 public class ShoppingCart {
+
     private static void print(Wallet wallet, Pocket pocket) throws Exception {
         System.out.println("Your current balance is: " + wallet.getBalance() + " credits.");
         System.out.println(Store.asString());
@@ -20,23 +21,20 @@ public class ShoppingCart {
 
         print(wallet, pocket);
         String product = scan(scanner);
-
-        while(!product.equals("quit")) {
-            /* TODO:
+        while (!product.equals("quit")) {
+           /*
+           TODO:
                - check if the amount of credits is enough, if not stop the execution.
                - otherwise, withdraw the price of the product from the wallet.
                - add the name of the product to the pocket file.a
                - print the new balance.
             */
             int price = Store.getProductPrice(product);
-            if(price > wallet.getBalance()){
-                System.out.println("Not enough money");
-                continue;
+            if(wallet.safeWithdraw(price)){
+                pocket.addProduct(product);
             }
             else{
-                Thread.sleep(500);
-                wallet.setBalance(wallet.getBalance() - price);
-                pocket.addProduct(product);
+                System.out.println("Not enough money");
             }
             // Just to print everything again...
             print(wallet, pocket);
