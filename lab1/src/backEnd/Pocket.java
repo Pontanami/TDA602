@@ -33,7 +33,6 @@ public class Pocket {
     public synchronized void addProduct(String product) throws Exception {
         try (FileLock lock = fileChannel.lock(0, Long.MAX_VALUE, false)) {
             this.file.seek(this.file.length());
-            Thread.sleep(3000);
             this.file.writeBytes(product+'\n');
             lock.release();
         }
@@ -59,7 +58,7 @@ public class Pocket {
     /**
      * Closes the RandomAccessFile in this.file
      */
-    public void close() throws Exception {
+    public synchronized void close() throws Exception {
         this.file.close();
     }
 }
