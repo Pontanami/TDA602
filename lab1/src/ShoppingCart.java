@@ -46,5 +46,6 @@ public class ShoppingCart {
             product = scan(scanner);
         }
         wallet.close();
+        pocket.close();
     }
 }
