@@ -31,7 +31,6 @@ public class ShoppingCartOld {
             int price = Store.getProductPrice(product);
             if(price > wallet.getBalance()){
                 System.out.println("Not enough money");
-                break;
             }
             else{
                 Thread.sleep(500);
